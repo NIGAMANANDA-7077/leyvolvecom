@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Home from './pages/Home.jsx'
 
 // Create context for loading state
@@ -64,23 +65,36 @@ import Services from './pages/Services.jsx'
 import Contact from './pages/Contact.jsx'
 import Work from './pages/Work.jsx'
 import LoadingScreen from './components/LoadingScreen.jsx'
+import WhatsAppButton from './components/WhatsAppButton.jsx'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
 
   return (
     <LoadingContext.Provider value={{ loading }}>
-      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
-      <Router>
-        <CustomCursor />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/aboutus" element={<Aboutus />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/work" element={<Work />} />
-        </Routes>
-      </Router>
+      <AnimatePresence>
+        {loading && <LoadingScreen onDone={() => setLoading(false)} />}
+      </AnimatePresence>
+      
+      {!loading && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Router>
+            <CustomCursor />
+            <WhatsAppButton />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/aboutus" element={<Aboutus />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/work" element={<Work />} />
+            </Routes>
+          </Router>
+        </motion.div>
+      )}
     </LoadingContext.Provider>
   )
 }
