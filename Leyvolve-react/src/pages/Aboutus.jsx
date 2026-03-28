@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-mo
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PremiumReveal from '../components/PremiumReveal';
+import MoovioCaseStudy from '../components/MoovioCaseStudy';
+import TeamSection from '../components/TeamSection';
 
 // --- Reusable Components & Helpers ---
 
@@ -190,32 +192,10 @@ export default function Aboutus() {
                     </div>
                 </section>
 
-                {/* 3. Stats Section */}
-                {/* <section className="relative overflow-hidden dark:bg-[#08080a]/80 bg-slate-100/60 backdrop-blur-3xl transition-colors duration-500 py-[120px] dark:text-white text-slate-800 my-10 border-t dark:border-white/10 border-slate-200">
-                    <GradientBackground />
+                {/* 4. Moovio Featured Case Study */}
+                <MoovioCaseStudy />
 
-                    <div className="max-w-[1200px] mx-auto px-6 relative z-10">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            {[
-                                { number: "100", label: "Clients", suffix: "+" },
-                                { number: "10", label: "Years Experience", suffix: "+" },
-                                { number: "150", label: "Projects", suffix: "+" },
-                                { number: "20", label: "Startup Brands", suffix: "+" }
-                            ].map((stat, i) => (
-                                <ScrollReveal key={i} delay={i * 0.1}>
-                                    <div className="glass-card p-8 rounded-2xl flex flex-col items-center justify-center text-center group transition-all duration-300 transform hover:-translate-y-2">
-                                        <h3 className="font-display font-bold text-5xl md:text-6xl text-transparent bg-clip-text dark:bg-gradient-to-b bg-gradient-to-b dark:from-white from-slate-900 dark:to-gray-400 to-slate-500 mb-2">
-                                            <AnimatedNumber value={stat.number} />{stat.suffix}
-                                        </h3>
-                                        <p className="dark:text-gray-400 text-slate-500 text-sm md:text-base font-medium uppercase tracking-widest">{stat.label}</p>
-                                    </div>
-                                </ScrollReveal>
-                            ))}
-                        </div>
-                    </div>
-                </section> */}
-
-                {/* 4. Our Services Section */}
+                {/* 5. Our Services Section */}
                 <section className="relative overflow-hidden dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors duration-500 py-[120px]">
                     <GradientBackground />
                     <div className="max-w-[1200px] mx-auto px-6 relative z-10">
@@ -248,43 +228,7 @@ export default function Aboutus() {
                 </section>
 
                 {/* 5. Team Section */}
-                <section className="relative overflow-hidden dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors duration-500 py-[120px]">
-                    <GradientBackground />
-                    <div className="max-w-[1200px] mx-auto px-6 relative z-10">
-                        <ScrollReveal>
-                            <PremiumReveal 
-                                text="Meet Our Creative Team"
-                                className="font-display font-bold text-4xl md:text-5xl mb-16 text-center"
-                                stagger={0.05}
-                            />
-                        </ScrollReveal>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-16">
-                            {[
-                                { name: "Sayad Salman Alli", role: "Founder & Creative Director", img: "https://i.pravatar.cc/300?img=11" },
-                                { name: "Sayad Masim Alli", role: "HR Manager", img: "https://i.pravatar.cc/300?img=12" },
-                                { name: "Sarah Jenkins", role: "Lead UI/UX", img: "https://i.pravatar.cc/300?img=5" },
-                                { name: "David Chen", role: "Lead Developer", img: "https://i.pravatar.cc/300?img=33" }
-                            ].map((member, i) => (
-                                <ScrollReveal key={i} delay={i * 0.1}>
-                                    <div className="group text-center cursor-pointer">
-                                        <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden mb-6 transform transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-2">
-                                            <img src={member.img} alt={member.name} className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" />
-                                            {/* Social overlay */}
-                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100">
-                                                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h4 className="font-bold text-xl dark:text-white text-slate-900">{member.name}</h4>
-                                        <p className="text-[#FF6A00] font-medium text-sm mt-1">{member.role}</p>
-                                    </div>
-                                </ScrollReveal>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                <TeamSection />
 
                 {/* 6. Why Choose Us Section */}
                 <section className="relative overflow-hidden dark:bg-[#0a0a0f]/80 bg-white/60 backdrop-blur-3xl transition-colors duration-500 py-[120px] border-t border-white/10 border-slate-200">

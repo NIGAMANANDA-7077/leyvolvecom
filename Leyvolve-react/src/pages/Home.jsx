@@ -80,7 +80,7 @@ function Hero() {
         )}
       </AnimatePresence>
 
-      <section className="relative min-h-[90vh] flex flex-col items-center pt-40 pb-20 overflow-hidden dark:bg-[#0a0a0f]/70 bg-white/50 backdrop-blur-3xl rounded-b-[3rem] transition-colors duration-500">
+      <section className="relative z-20 min-h-[100svh] flex flex-col items-center justify-center pt-28 pb-16 overflow-hidden dark:bg-[#0a0a0f]/70 bg-white/50 backdrop-blur-3xl rounded-b-[2rem] md:rounded-b-[3rem] transition-colors duration-500">
         <GradientBackground />
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 mt-4 flex flex-col items-center text-center">
@@ -598,7 +598,7 @@ function ScrollCard({ card, index, totalCards }) {
 
 function Process() {
   return (
-    <section id="process" className="relative dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors pt-20 pb-32">
+    <section id="process" className="relative dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors pt-20 pb-0">
       <GradientBackground />
       <div className="sticky top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden select-none">
         <h2
@@ -609,7 +609,7 @@ function Process() {
         </h2>
       </div>
 
-      <div className="relative z-10 w-full mx-auto pb-20">
+      <div className="relative z-10 w-full mx-auto pb-0">
         <div className="flex-shrink-0 pt-4 pb-0 text-center relative z-20">
           <span className="font-mono text-[11px] text-[#555] tracking-[0.3em] uppercase">(Why clients love us)</span>
         </div>
@@ -633,32 +633,50 @@ const projects = [
   {
     id: 1,
     number: '01',
-    title: 'Project Title',
-    link: '#',
+    title: 'Gym Website',
+    category: 'Business Website',
+    link: 'https://gym-demo-beta.vercel.app/',
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80',
   },
   {
     id: 2,
     number: '02',
-    title: 'Project Title',
-    link: '#',
+    title: 'E-commerce Full Stack',
+    category: 'E-commerce',
+    link: 'https://inspiring-croissant-7e944d.netlify.app/',
+    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80',
   },
   {
     id: 3,
     number: '03',
-    title: 'Project Title',
-    link: '#',
+    title: 'Hotel Website',
+    category: 'Business Website',
+    link: 'https://heroic-dusk-708c85.netlify.app/',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80',
   },
   {
     id: 4,
     number: '04',
-    title: 'Project Title',
-    link: '#',
+    title: 'Carpenter Furniture Service',
+    category: 'Service Website',
+    link: 'https://furnitureservice01.netlify.app/',
+    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80',
   },
   {
     id: 5,
     number: '05',
-    title: 'Project Title',
-    link: '#',
+    title: 'Furniture Website',
+    category: 'E-commerce',
+    link: 'https://rajafurniture123.netlify.app/',
+    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80',
+  },
+  {
+    id: 6,
+    number: '06',
+    title: 'Play School Website',
+    category: 'Education',
+    link: 'https://playschooldemo.netlify.app/',
+    image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=80',
   },
 ]
 
@@ -666,7 +684,7 @@ function Portfolio() {
   const [activeCard, setActiveCard] = useState(1)
 
   return (
-    <section id="portfolio" className="relative dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors py-24">
+    <section id="portfolio" className="relative dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors pt-10 pb-24">
       <GradientBackground />
 
       <div className="sticky top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden select-none">
@@ -684,7 +702,7 @@ function Portfolio() {
           <span className="font-mono text-[11px] text-[#555] tracking-[0.3em] uppercase">(Selected Works)</span>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 min-h-[500px]">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-3 min-h-[500px]">
           {projects.map((project, index) => {
             const isActive = activeCard === project.id
             const isEven = index % 2 === 0
@@ -693,62 +711,74 @@ function Portfolio() {
               <motion.a
                 key={project.id}
                 href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 onMouseEnter={() => setActiveCard(project.id)}
                 initial={{ x: isEven ? -100 : 100, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ 
                   duration: 0.8, 
-                  delay: index * 0.1,
+                  delay: index * 0.08,
                   ease: [0.33, 1, 0.68, 1]
                 }}
                 className={`
-                  relative group flex flex-col justify-between p-8 rounded-2xl border dark:border-white/10 border-slate-200/60 
-                  dark:bg-[#1a1a24] bg-gradient-to-br from-white to-slate-50 shadow-sm hover:shadow-xl dark:hover:border-[#FF5A1F]/30 hover:border-slate-300 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
-                  overflow-hidden cursor-pointer
-                  ${isActive ? 'md:flex-[2.5] ring-1 dark:ring-[#FF5A1F]/50 ring-slate-200' : 'md:flex-1'}
+                  relative group flex flex-col justify-between rounded-2xl overflow-hidden cursor-pointer
+                  transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-md hover:shadow-2xl
+                  ${isActive ? 'md:flex-[2.5]' : 'md:flex-1'}
                 `}
-                style={{
-                  minHeight: '200px'
-                }}
+                style={{ minHeight: '480px' }}
               >
+                {/* Background image */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-tr from-slate-100/80 via-white to-blue-50/30 dark:hidden transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                  style={{ zIndex: 0 }}
+                  className="absolute inset-0 bg-cover bg-center scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  style={{ backgroundImage: `url(${project.image})` }}
                 />
-
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+                {/* Active orange glow */}
                 {isActive && (
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5A1F]/5 blur-3xl pointer-events-none z-0" />
+                  <div className="absolute inset-0 ring-2 ring-[#FF5A1F]/60 rounded-2xl pointer-events-none z-10" />
                 )}
 
-                <div className="relative z-10 w-full flex justify-between items-start">
-                  <span className={`font-display font-black leading-none transition-all duration-500 ${isActive ? 'text-6xl dark:text-white text-slate-800' : 'text-4xl dark:text-white/20 text-slate-300 dark:group-hover:text-white/40 group-hover:text-slate-500'}`}>
+                {/* Top area: number + arrow */}
+                <div className="relative z-10 flex justify-between items-start p-6">
+                  <span className={`font-display font-black leading-none transition-all duration-500 drop-shadow-lg ${
+                    isActive ? 'text-6xl text-white' : 'text-4xl text-white/40 group-hover:text-white/70'
+                  }`}>
                     {project.number}
                   </span>
 
                   <div className={`
-                    w-10 h-10 rounded-full border dark:border-white/10 border-slate-200 dark:bg-white/5 bg-white shadow-sm flex items-center justify-center
+                    w-10 h-10 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm flex items-center justify-center
                     transition-all duration-500 transform
-                    ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}
+                    ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-60'}
                   `}>
-                    <svg className="w-4 h-4 dark:text-white text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </div>
                 </div>
 
-                <div className={`relative z-10 transition-all duration-500 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 md:opacity-100'}`}>
-                  <h3 className={`font-bold dark:text-white text-slate-900 transition-all duration-500 ${isActive ? 'text-2xl mb-2' : 'text-lg md:-rotate-90 md:origin-bottom-left md:absolute md:bottom-0 md:left-8 mb-0 whitespace-nowrap'}`}>
-                    {project.title}
-                  </h3>
+                {/* Bottom area: category badge + title + CTA */}
+                <div className="relative z-10 p-6">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#FF5A1F]/80 text-white mb-3 backdrop-blur-sm">
+                    {project.category}
+                  </span>
 
-                  <div className={`
-                    flex items-center gap-2 text-sm font-medium text-[#FF5A1F]
-                    transition-all duration-500 md:h-auto overflow-hidden
-                    ${isActive ? 'max-h-12 opacity-100 md:mt-2' : 'max-h-0 opacity-0'}
-                  `}>
-                    View Project
-                    <div className="w-8 h-[1px] bg-[#FF5A1F]/60" />
+                  <div className={`transition-all duration-500 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-80 md:opacity-100'}`}>
+                    <h3 className={`font-bold text-white drop-shadow transition-all duration-500 ${isActive ? 'text-2xl mb-3' : 'text-lg md:-rotate-90 md:origin-bottom-left md:absolute md:bottom-16 md:left-6 whitespace-nowrap mb-0'}`}>
+                      {project.title}
+                    </h3>
+
+                    <div className={`
+                      flex items-center gap-2 text-sm font-medium text-[#FF5A1F]
+                      transition-all duration-500 overflow-hidden
+                      ${isActive ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}
+                    `}>
+                      View Project
+                      <div className="w-8 h-[1px] bg-[#FF5A1F]/60" />
+                    </div>
                   </div>
                 </div>
 

@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import PremiumReveal from '../components/PremiumReveal.jsx'
+import ProjectCard from '../components/ProjectCard.jsx'
 import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 
@@ -26,57 +27,142 @@ function Reveal({ children, delay = 0, className = '' }) {
     )
 }
 
-/* ─── Data ─── */
-const categories = ['All', 'Web Development', 'Digital Marketing', 'Influencer Marketing', 'Social Media', 'SEO']
+/* ─── Drag-scroll hook ─── */
+function useDragScroll() {
+    const ref = useRef(null)
+    const isDragging = useRef(false)
+    const startX = useRef(0)
+    const scrollLeft = useRef(0)
+    const hasDragged = useRef(false)
+    
+    // Momentum state
+    const velocity = useRef(0)
+    const lastTime = useRef(0)
+    const lastX = useRef(0)
+    const animationFrame = useRef(null)
 
-const projects = [
+    const onMouseDown = (e) => {
+        isDragging.current = true
+        hasDragged.current = false
+        startX.current = e.pageX - ref.current.offsetLeft
+        scrollLeft.current = ref.current.scrollLeft
+        
+        lastX.current = e.pageX
+        lastTime.current = Date.now()
+        velocity.current = 0
+        if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
+        
+        ref.current.style.cursor = 'grabbing'
+        ref.current.style.userSelect = 'none'
+    }
+
+    const onMouseMove = (e) => {
+        if (!isDragging.current) return
+        e.preventDefault()
+        
+        const x = e.pageX - ref.current.offsetLeft
+        const walk = (x - startX.current) * 1.5 // slightly faster tracking
+        if (Math.abs(walk) > 4) hasDragged.current = true
+        ref.current.scrollLeft = scrollLeft.current - walk
+
+        // Calculate velocity
+        const now = Date.now()
+        const dt = now - lastTime.current
+        if (dt > 0) {
+            const dx = e.pageX - lastX.current
+            velocity.current = dx / dt
+        }
+        lastX.current = e.pageX
+        lastTime.current = now
+    }
+
+    const applyMomentum = () => {
+        if (Math.abs(velocity.current) > 0.05) {
+            ref.current.scrollLeft -= velocity.current * 16 // roughly 16ms per frame
+            velocity.current *= 0.92 // friction multiplier
+            animationFrame.current = requestAnimationFrame(applyMomentum)
+        }
+    }
+
+    const onMouseUp = () => {
+        if (!isDragging.current) return
+        isDragging.current = false
+        ref.current.style.cursor = 'grab'
+        ref.current.style.userSelect = ''
+        
+        // Start momentum if dragging stopped but mouse is still moving (or moved recently)
+        const dt = Date.now() - lastTime.current
+        if (dt < 100) {
+            animationFrame.current = requestAnimationFrame(applyMomentum)
+        }
+    }
+
+    const onMouseLeave = () => {
+        if (isDragging.current) onMouseUp()
+    }
+
+    /* Prevent click on child links if user just dragged */
+    const onClickCapture = (e) => {
+        if (hasDragged.current) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+    }
+
+    return { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave, onClickCapture }
+}
+
+/* ─── Data ─── */
+const portfolioCategories = ['All', 'E-commerce', 'Business Website', 'Service Website', 'Education']
+
+const portfolioProjects = [
     {
-        id: 1, title: 'NovaTech Startup Website', category: 'Web Development', service: 'Web Development & Design',
-        desc: 'A blazing-fast startup website with 3D animations, conversion-optimised landing pages, and a custom CMS.',
-        color: 'from-blue-600/30 to-purple-600/30', icon: '🖥️', result: '+340% conversion rate',
-        tags: ['Next.js', 'Framer Motion', 'Tailwind'],
+        id: 1,
+        title: 'Gym Website',
+        url: 'https://gym-demo-beta.vercel.app/',
+        description: 'Modern fitness website with responsive UI and booking sections',
+        category: 'Business Website',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80',
     },
     {
-        id: 2, title: 'FashionFirst E-commerce', category: 'Web Development', service: 'Web Development & Design',
-        desc: 'Full-stack e-commerce store with AI-powered product recommendations and seamless checkout flow.',
-        color: 'from-pink-600/30 to-rose-600/30', icon: '🛍️', result: '+220% online sales',
-        tags: ['React', 'Stripe', 'Node.js'],
+        id: 2,
+        title: 'E-commerce Full Stack',
+        url: 'https://inspiring-croissant-7e944d.netlify.app/',
+        description: 'Full stack shopping platform with cart and authentication',
+        category: 'E-commerce',
+        image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80',
     },
     {
-        id: 3, title: 'UrbanFit Influencer Drive', category: 'Influencer Marketing', service: 'Influencer Marketing',
-        desc: 'Connected a fitness brand with 25 micro-influencers across Instagram & YouTube for a product launch.',
-        color: 'from-emerald-600/30 to-teal-600/30', icon: '📸', result: '+150K reach in 30 days',
-        tags: ['Instagram', 'YouTube', 'UGC'],
+        id: 3,
+        title: 'Hotel Website',
+        url: 'https://heroic-dusk-708c85.netlify.app/',
+        description: 'Hotel booking UI with modern design and responsiveness',
+        category: 'Business Website',
+        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80',
     },
     {
-        id: 4, title: 'GrowthHive Google Ads', category: 'Digital Marketing', service: 'Digital Marketing',
-        desc: 'Full-funnel paid advertising campaign generating qualified B2B leads at a 5x ROAS.',
-        color: 'from-yellow-600/30 to-orange-600/30', icon: '📈', result: '+300% leads at 5x ROAS',
-        tags: ['Google Ads', 'Meta Ads', 'Analytics'],
+        id: 4,
+        title: 'Carpenter Furniture Service',
+        url: 'https://furnitureservice01.netlify.app/',
+        description: 'Service-based website for furniture repair and carpentry',
+        category: 'Service Website',
+        image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80',
     },
     {
-        id: 5, title: 'CaféWave Instagram Brand', category: 'Social Media', service: 'Social Media Management',
-        desc: 'Grew a local café chain from 800 to 45K followers in 6 months through strategic content & reels.',
-        color: 'from-amber-600/30 to-yellow-600/30', icon: '☕', result: '+45K followers, 6 months',
-        tags: ['Instagram', 'Reels', 'Content'],
+        id: 5,
+        title: 'Furniture Website',
+        url: 'https://rajafurniture123.netlify.app/',
+        description: 'Furniture showcase website with clean UI',
+        category: 'E-commerce',
+        image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80',
     },
     {
-        id: 6, title: 'LegalEdge SEO Domination', category: 'SEO', service: 'SEO Optimization',
-        desc: 'Moved a legal firm from page 5 to #1 Google ranking for 12 high-intent keywords in 90 days.',
-        color: 'from-violet-600/30 to-indigo-600/30', icon: '⚖️', result: '#1 ranking, 90 days',
-        tags: ['Technical SEO', 'Content', 'Link Building'],
-    },
-    {
-        id: 7, title: 'MediCare Landing Pages', category: 'Web Development', service: 'Web Development & Design',
-        desc: 'High-converting healthcare landing pages with booking integrations and HIPAA-compliant forms.',
-        color: 'from-cyan-600/30 to-sky-600/30', icon: '🏥', result: '+180% appointment bookings',
-        tags: ['React', 'Calendly API', 'UX'],
-    },
-    {
-        id: 8, title: 'EduLearn Social Campaign', category: 'Social Media', service: 'Social Media Management',
-        desc: 'Managed an ed-tech brand across LinkedIn, Twitter and Instagram with daily content & community management.',
-        color: 'from-lime-600/30 to-green-600/30', icon: '📚', result: '+280% engagement rate',
-        tags: ['LinkedIn', 'Twitter', 'Strategy'],
+        id: 6,
+        title: 'Play School Website',
+        url: 'https://playschooldemo.netlify.app/',
+        description: 'Educational website for play school with engaging UI',
+        category: 'Education',
+        image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=80',
     },
 ]
 
@@ -203,154 +289,100 @@ function Hero() {
 }
 
 /* ─────────────────────────── */
-/* 2. FEATURED PROJECTS */
+/* 2. OUR PORTFOLIO            */
 /* ─────────────────────────── */
-function FeaturedProjects() {
-    const featured = projects.slice(0, 4)
+function OurPortfolio() {
+    const [activeFilter, setActiveFilter] = useState('All')
+    const dragScroll = useDragScroll()
+
+    const filtered = activeFilter === 'All'
+        ? portfolioProjects
+        : portfolioProjects.filter(p => p.category === activeFilter)
+
+    const [featured, ...rest] = filtered
+
     return (
         <section className="relative py-28 overflow-hidden bg-slate-50/60 backdrop-blur-3xl">
             <GradientBackground />
-            <div className="relative z-10 max-w-5xl mx-auto px-6">
-                <Reveal className="text-center mb-16">
-                    <span className="font-mono text-[11px] text-[#FF6A00] tracking-[0.3em] uppercase">(Featured Work)</span>
-                    <PremiumReveal 
-                        text="Selected Projects"
-                        className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] text-[#111] mt-3"
-                        stagger={0.05}
-                    />
-                </Reveal>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {featured.map((p, i) => (
-                        <motion.div 
-                            key={p.id}
-                            initial={{ y: 60, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, delay: i * 0.1, ease: [0.33, 1, 0.68, 1] }}
-                        >
-                            <motion.div whileHover={{ y: -12, boxShadow: '0 40px 80px rgba(255,106,0,0.18)' }} transition={{ duration: 0.4 }}
-                                className="group relative bg-[#0F0F0F] rounded-3xl overflow-hidden border border-white/10 cursor-default">
-                                {/* Visual area */}
-                                <div className={`relative h-52 bg-gradient-to-br ${p.color} flex items-center justify-center overflow-hidden`}>
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                        style={{ background: 'radial-gradient(circle at 50% 50%, rgba(255,106,0,0.1), transparent 70%)' }} />
-                                    <motion.div className="text-6xl" whileHover={{ scale: 1.2, rotate: 5 }} transition={{ duration: 0.3 }}>
-                                        {p.icon}
-                                    </motion.div>
-                                    <div className="absolute top-4 right-4">
-                                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold text-white border border-white/20 bg-white/5 backdrop-blur-sm">
-                                            {p.service}
-                                        </span>
-                                    </div>
-                                    <div className="absolute bottom-4 left-4">
-                                        <span className="px-3 py-1 rounded-full text-[10px] font-bold text-white" style={{ background: 'linear-gradient(135deg, #FF6A00, #FF3C00)' }}>
-                                            {p.result}
-                                        </span>
-                                    </div>
-                                </div>
+            <div className="relative z-10 max-w-6xl mx-auto px-6">
 
-                                {/* Content */}
-                                <div className="p-7">
-                                    <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                        style={{ background: 'linear-gradient(90deg, transparent, #FF6A00, transparent)' }} />
-                                    <h3 className="text-white font-display font-bold text-xl mb-2">{p.title}</h3>
-                                    <p className="text-white/50 text-sm leading-relaxed mb-5">{p.desc}</p>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex flex-wrap gap-2">
-                                            {p.tags.map(t => (
-                                                <span key={t} className="px-2.5 py-1 rounded-full text-[10px] font-medium text-white/60 border border-white/10 bg-white/5">{t}</span>
-                                            ))}
-                                        </div>
-                                        <motion.div whileHover={{ x: 4 }} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-[#FF6A00]">
-                                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                            </svg>
-                                        </motion.div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    )
-}
-
-/* ─────────────────────────── */
-/* 3 + 4. FILTER + PORTFOLIO GRID */
-/* ─────────────────────────── */
-function PortfolioGrid() {
-    const [active, setActive] = useState('All')
-
-    const filtered = active === 'All' ? projects : projects.filter(p =>
-        p.category.toLowerCase().includes(active.toLowerCase()) ||
-        active.toLowerCase().includes(p.category.toLowerCase())
-    )
-
-    return (
-        <section className="relative py-28 overflow-hidden bg-white/40 backdrop-blur-3xl">
-            <GradientBackground />
-            <div className="relative z-10 max-w-5xl mx-auto px-6">
+                {/* Section header */}
                 <Reveal className="text-center mb-10">
-                    <span className="font-mono text-[11px] text-[#FF6A00] tracking-[0.3em] uppercase">(All Work)</span>
-                    <PremiumReveal 
-                        text="Browse by Category"
+                    <span className="font-mono text-[11px] text-[#FF6A00] tracking-[0.3em] uppercase">(Our Portfolio)</span>
+                    <PremiumReveal
+                        text="Real Projects. Real Results."
                         className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] text-[#111] mt-3"
                         stagger={0.05}
                     />
+                    <p className="text-slate-500 text-base mt-4 max-w-xl mx-auto leading-relaxed">
+                        A selection of live websites we have built for clients across various industries.
+                    </p>
                 </Reveal>
 
-                {/* Filter tabs */}
+                {/* Filter bar */}
                 <Reveal delay={0.1} className="flex flex-wrap justify-center gap-3 mb-14">
-                    {categories.map(cat => (
-                        <motion.button key={cat} onClick={() => setActive(cat)}
-                            whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${active === cat
-                                ? 'text-white shadow-lg shadow-orange-300/30'
-                                : 'text-slate-500 border border-slate-200 bg-white hover:border-orange-200'}`}
-                            style={active === cat ? { background: 'linear-gradient(135deg, #FF6A00, #FF3C00)' } : {}}>
+                    {portfolioCategories.map(cat => (
+                        <motion.button
+                            key={cat}
+                            onClick={() => setActiveFilter(cat)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.96 }}
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                                activeFilter === cat
+                                    ? 'text-white shadow-lg shadow-orange-300/30'
+                                    : 'text-slate-500 border border-slate-200 bg-white hover:border-orange-300'
+                            }`}
+                            style={activeFilter === cat ? { background: 'linear-gradient(135deg, #FF6A00, #FF3C00)' } : {}}
+                        >
                             {cat}
                         </motion.button>
                     ))}
                 </Reveal>
 
-                {/* Grid */}
                 <AnimatePresence mode="wait">
-                    <motion.div key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        transition={{ duration: 0.35 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {filtered.map((p, i) => (
-                            <motion.div 
-                                key={p.id} 
-                                initial={{ opacity: 0, scale: 0.9, y: 40 }} 
-                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-50px" }}
-                                transition={{ 
-                                    opacity: { duration: 0.6 },
-                                    scale: { type: "spring", stiffness: 100, damping: 20, delay: i * 0.05 },
-                                    y: { duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: i * 0.05 }
+                    <motion.div
+                        key={activeFilter}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35 }}
+                    >
+                        {/* Featured card – first filtered project, full width */}
+                        {featured && (
+                            <div className="mb-8">
+                                <ProjectCard project={featured} featured={true} index={0} />
+                            </div>
+                        )}
+
+                        {/* Horizontal scroll row – drag with mouse */}
+                        {rest.length > 0 && (
+                            <div
+                                ref={dragScroll.ref}
+                                onMouseDown={dragScroll.onMouseDown}
+                                onMouseMove={dragScroll.onMouseMove}
+                                onMouseUp={dragScroll.onMouseUp}
+                                onMouseLeave={dragScroll.onMouseLeave}
+                                onClickCapture={dragScroll.onClickCapture}
+                                className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory select-none"
+                                style={{
+                                    scrollbarWidth: 'none',
+                                    msOverflowStyle: 'none',
+                                    cursor: 'grab',
                                 }}
-                                whileHover={{ y: -8, scale: 1.02, boxShadow: '0 30px 60px rgba(255,106,0,0.15)' }}
-                                className="group bg-[#0F0F0F] rounded-2xl overflow-hidden border border-white/10 cursor-default max-w-sm mx-auto w-full"
                             >
-                                <div className={`h-36 bg-gradient-to-br ${p.color} flex items-center justify-center relative`}>
-                                    <span className="text-4xl">{p.icon}</span>
-                                    <div className="absolute bottom-3 left-3">
-                                        <span className="text-[9px] font-semibold uppercase tracking-widest text-white/50">{p.category}</span>
+                                {rest.map((project, i) => (
+                                    <div key={project.id} className="snap-start">
+                                        <ProjectCard project={project} featured={false} index={i + 1} />
                                     </div>
-                                </div>
-                                <div className="p-5">
-                                    <h3 className="text-white font-bold text-base mb-1.5">{p.title}</h3>
-                                    <p className="text-white/40 text-xs leading-relaxed mb-3">{p.desc.substring(0, 80)}...</p>
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-[#FF6A00] text-xs font-bold">{p.result}</span>
-                                        <div className="flex gap-1.5">
-                                            {p.tags.slice(0, 2).map(t => <span key={t} className="text-[9px] text-white/30 border border-white/10 rounded-full px-2 py-0.5">{t}</span>)}
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                ))}
+                            </div>
+                        )}
+
+                        {filtered.length === 0 && (
+                            <div className="text-center py-20 text-slate-400">
+                                No projects in this category yet.
+                            </div>
+                        )}
                     </motion.div>
                 </AnimatePresence>
             </div>
@@ -572,7 +604,7 @@ export default function Work() {
             <Navbar />
             <main>
                 <Hero />
-                <FeaturedProjects />
+                <OurPortfolio />
                 <CaseStudies />
                 {/* <ClientLogos /> */}
                 {/* <Testimonials /> */}

@@ -13,6 +13,8 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
@@ -21,6 +23,7 @@
     background-attachment: fixed;
     font-family: 'DM Sans', sans-serif;
     overflow-x: hidden;
+    max-width: 100%;
     transition: background-color 0.4s ease-out, color 0.4s ease-out;
   }
 

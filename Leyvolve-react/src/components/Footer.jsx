@@ -53,9 +53,9 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Main footer content */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="py-10 md:py-16 grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-10">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 md:col-span-1 lg:col-span-1">
             <div className="flex items-center gap-2 mb-5">
               <div className="relative w-7 h-7">
                 <div className="absolute inset-0 rounded-md bg-gradient-to-br from-blue-600 to-green-500" />
@@ -120,7 +120,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h4 className="font-display font-semibold text-xs text-slate-500 tracking-widest uppercase mb-5">Contact</h4>
             <div className="space-y-4">
               <a href="mailto:info@leyvolve.com" className="flex items-center gap-2 font-body text-sm text-slate-400 hover:text-white transition-colors duration-300">
