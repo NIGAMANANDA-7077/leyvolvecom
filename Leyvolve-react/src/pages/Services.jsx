@@ -575,7 +575,7 @@ function CTA() {
         setError(null)
         
         try {
-            const response = await fetch("http://localhost:5001/api/send-message", {
+            const response = await fetch("https://leyvolvecombackend.onrender.com/api/send-message", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
