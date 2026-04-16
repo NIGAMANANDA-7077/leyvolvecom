@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import PremiumReveal from '../components/PremiumReveal.jsx'
 import { useState, useEffect, useRef, useContext } from 'react'
-import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { LoadingContext } from '../App'
 
 function GradientBackground() {
@@ -99,100 +99,55 @@ function Hero() {
             <span className="text-gray-500 font-medium text-[15px]">Trusted by founders.</span>
           </motion.div>
 
-          <div className="font-display font-bold text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.05] tracking-tight dark:text-white text-[#1a1a1a] max-w-5xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-2 md:gap-x-4 mb-2">
-              {splitText('Effortless')}
-              <motion.span 
-                initial={{ scale: 0, rotate: -20 }}
-                animate={!loading ? { scale: 1, rotate: -6 } : { scale: 0, rotate: -20 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
-                className="w-[clamp(3.5rem,8vw,5.5rem)] h-[clamp(3.5rem,8vw,5.5rem)] rounded-full overflow-hidden shadow-sm bg-orange-100 flex items-center justify-center p-1.5"
-              >
-                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=200&h=200&auto=format&fit=crop" alt="Phone" className="w-full h-full object-cover rounded-full mix-blend-multiply" />
-              </motion.span>
-              <span className="text-[#ff5c00] overflow-hidden inline-block">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: '100%' }}
-                  animate={!loading ? { y: 0 } : { y: '100%' }}
-                  transition={{ duration: 1, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  Design
-                </motion.span>
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-x-2 md:gap-x-4 mb-2">
-              <span className="text-gray-500 font-medium text-[clamp(2rem,5vw,4.5rem)] overflow-hidden inline-block">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: '100%' }}
-                  animate={!loading ? { y: 0 } : { y: '100%' }}
-                  transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  for
-                </motion.span>
-              </span>
-              <motion.span 
-                initial={{ scale: 0 }}
-                animate={!loading ? { scale: 1 } : { scale: 0 }}
-                transition={{ duration: 0.8, delay: 0.9, ease: [0.34, 1.56, 0.64, 1] }}
-                className="w-[clamp(3.5rem,8vw,5.5rem)] h-[clamp(3.5rem,8vw,5.5rem)] rounded-full overflow-hidden shadow-sm bg-stone-800 p-0.5"
-              >
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=200&h=200&auto=format&fit=crop" alt="Working" className="w-full h-full object-cover rounded-full opacity-90" />
-              </motion.span>
-              {splitText('Design Startups')}
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-x-2 md:gap-x-4">
-              <span className="text-gray-500 font-medium text-[clamp(2rem,5vw,4.5rem)] overflow-hidden inline-block">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: '100%' }}
-                  animate={!loading ? { y: 0 } : { y: '100%' }}
-                  transition={{ duration: 1, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  based in
-                </motion.span>
-              </span>
-              {splitText('INDIA')}
-              <motion.span 
-                initial={{ scale: 0 }}
-                animate={!loading ? { scale: 1 } : { scale: 0 }}
-                transition={{ duration: 0.8, delay: 1.3, ease: [0.34, 1.56, 0.64, 1] }}
-                className="w-[clamp(3.5rem,8vw,5.5rem)] h-[clamp(3.5rem,8vw,5.5rem)] rounded-full overflow-hidden border-2 border-slate-200"
-              >
-                <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=200&h=200&auto=format&fit=crop" alt="INDIA" className="w-full h-full object-cover" />
-              </motion.span>
-            </div>
-          </div>
+          <h1 className="font-display font-bold text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.1] tracking-tight dark:text-white text-[#1a1a1a] max-w-4xl mx-auto">
+            We Don't Just Build Brands - We Scale Them
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={!loading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 1.5 }}
-            className="mt-10 font-body text-[clamp(0.9rem,1.5vw,1.1rem)] text-gray-500 max-w-2xl mx-auto leading-relaxed"
+            className="mt-8 font-body text-[clamp(1rem,1.5vw,1.2rem)] text-gray-500 max-w-2xl mx-auto leading-relaxed"
           >
-            We make it easy for startups to launch, grow, and scale with clean,
-            <br className="hidden md:block" /> conversion focused designs — no delays, no drama.
+            High-converting ads, funnels, and strategies designed to drive real revenue.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={!loading ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.8, delay: 1.7 }}
-            className="mt-12"
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button
-              onClick={() => scrollTo('#pricing')}
-              className="group flex items-center justify-center gap-3 px-8 py-4 dark:bg-white dark:text-black bg-[#3d3d3d] hover:bg-[#222] text-white rounded-full font-medium text-[15px] transition-all duration-300 shadow-md transform hover:scale-105"
+            <a
+              href="/contact"
+              id="hero-cta-primary"
+              className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#FF5A1F] hover:bg-[#e04e18] text-white rounded-full font-semibold text-[15px] transition-all duration-300 shadow-lg shadow-orange-400/30 transform hover:scale-105"
             >
-              View Plans
-              <svg className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Get Free Audit
+              <svg className="w-4 h-4 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </button>
+            </a>
+            <a
+              href="/work"
+              id="hero-cta-secondary"
+              className="group flex items-center justify-center gap-3 px-8 py-4 dark:bg-white/10 dark:text-white dark:border-white/20 bg-white text-[#1a1a1a] border border-slate-200 hover:border-slate-400 rounded-full font-medium text-[15px] transition-all duration-300 shadow-sm transform hover:scale-105"
+            >
+              View Our Work
+              <svg className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={!loading ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 2.0 }}
+            className="mt-6 font-mono text-[11px] text-gray-400 tracking-widest uppercase"
+          >
+            100+ startups served · India's fastest-growing digital agency
+          </motion.p>
 
         </div>
       </section>
@@ -286,13 +241,62 @@ function Services() {
   )
 }
 
+function StatsBar() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  const stats = [
+    { value: 100, suffix: '+', label: 'Projects Delivered' },
+    { value: 50, suffix: '+', label: 'Happy Clients' },
+    { value: 3, suffix: 'x', label: 'Average ROI' },
+    { value: 98, suffix: '%', label: 'Client Satisfaction' },
+  ]
+
+  function AnimatedCount({ target, suffix, active }) {
+    const [count, setCount] = useState(0)
+    useEffect(() => {
+      if (!active) return
+      let start = 0
+      const step = target / (1.8 * 60)
+      const timer = setInterval(() => {
+        start += step
+        if (start >= target) { setCount(target); clearInterval(timer) }
+        else setCount(Math.floor(start))
+      }, 1000 / 60)
+      return () => clearInterval(timer)
+    }, [active, target])
+    return <>{count}{suffix}</>
+  }
+
+  return (
+    <section ref={ref} className="relative dark:bg-[#0a0a0f] bg-white transition-colors py-14 -mt-6 z-[5]">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="flex flex-col items-center text-center"
+            >
+              <span className="font-display font-black text-[clamp(2.2rem,5vw,3.5rem)] dark:text-white text-[#1a1a1a] leading-none tabular-nums">
+                <AnimatedCount target={s.value} suffix={s.suffix} active={inView} />
+              </span>
+              <span className="mt-2 text-[13px] text-gray-500 font-medium tracking-wide">{s.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const tags = [
-  { label: 'Branding', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg> },
-  { label: 'Logo', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg> },
-  { label: 'Website', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg> },
-  { label: 'Illustration', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg> },
-  { label: 'Interface', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg> },
-  { label: 'Strategy', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> },
+  { label: 'Performance Ads', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg> },
+  { label: 'Conversion Design', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg> },
+  { label: 'Scaling Strategy', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> },
+  { label: 'Analytics', icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> },
 ]
 
 function About() {
@@ -320,11 +324,21 @@ function About() {
           </span>
         </motion.div>
 
+        <h2 className="sr-only">We help fast moving digital startups launch sharper brands and websites - with clarity, speed, and no drama.</h2>
         <PremiumReveal 
-          text="We help fast moving digital startups launch sharper brands and websites — with clarity , speed, and no drama."
-          className="font-display font-medium text-[clamp(2.5rem,4.5vw,3.5rem)] leading-[1.1] tracking-tight dark:text-white text-[#1a1a1a] mb-12"
+          text="We help fast moving digital startups launch sharper brands and websites - with clarity, speed, and no drama."
+          className="font-display font-medium text-[clamp(2.5rem,4.5vw,3.5rem)] leading-[1.1] tracking-tight dark:text-white text-[#1a1a1a] mb-6"
           stagger={0.03}
         />
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-body text-[clamp(1.1rem,1.8vw,1.4rem)] text-gray-500 max-w-3xl mx-auto mb-12 leading-relaxed"
+        >
+          We don't just design - we build systems that bring you customers.
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -350,283 +364,177 @@ function About() {
   )
 }
 
-const cards = [
+const offerCards = [
   {
     id: 1,
-    title: 'Web Development & Design',
-    description: "We've helped startups and brands across industries launch stunning, high-performance websites that captivate and convert. Here are some of our selected works.",
-    year: '2025',
-    role: 'Lead Designer',
-    services: ['Website Design', 'Product Design', 'Branding', 'Development'],
-    accent: '#6366f1',
-    tag: 'Ps',
-    mockupBg: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-    mockupAccent: 'rgba(99,102,241,0.3)',
-    mockupTitle: 'Archin Design Studio',
-    mockupSubtitle: 'Web & Brand Identity',
+    title: 'Web Design & Development',
+    description: 'Stunning, high-converting websites built for startups. From landing pages to full e-commerce — fast, clean, and designed to grow.',
+    gradient: 'linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #0891b2 100%)',
+    iconBg: 'rgba(255,255,255,0.18)',
+    icon: (
+      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
   },
   {
     id: 2,
-    title: 'Influencer Marketing',
-    description: "Connecting brands with the right creators for measurable reach. We identify, manage, and track influencer campaigns that deliver authentic results and real conversions.",
-    year: '2025',
-    role: 'Campaign Lead',
-    services: ['Influencer Strategy', 'Creator Outreach', 'Campaign Tracking', 'ROI Analysis'],
-    accent: '#f472b6',
-    tag: 'Ai',
-    mockupBg: 'linear-gradient(135deg, #2e1a2e 0%, #3d0f3d 50%, #5c0a3f 100%)',
-    mockupAccent: 'rgba(244,114,182,0.3)',
-    mockupTitle: 'Nova Creator Network',
-    mockupSubtitle: 'Influencer Campaigns',
+    title: 'Digital Marketing',
+    description: 'Performance-driven marketing that generates leads and revenue. Google Ads, Meta Ads, email funnels — built to scale your startup.',
+    gradient: 'linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%)',
+    iconBg: 'rgba(255,255,255,0.18)',
+    icon: (
+      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
   },
   {
     id: 3,
-    title: 'Digital Marketing',
-    description: "Full-funnel digital strategies built to scale. From paid acquisition to email funnels, we help startups build predictable revenue engines — no guesswork, just growth.",
-    year: '2025',
-    role: 'Growth Strategist',
-    services: ['PPC Ads', 'Email Marketing', 'Conversion Funnels', 'Analytics'],
-    accent: '#fb923c',
-    tag: 'Xd',
-    mockupBg: 'linear-gradient(135deg, #2e1a0a 0%, #3d2a10 50%, #5c3a18 100%)',
-    mockupAccent: 'rgba(251,146,60,0.3)',
-    mockupTitle: 'Launchpad Growth Co.',
-    mockupSubtitle: 'Digital Marketing Suite',
+    title: 'SEO Optimization',
+    description: 'Dominate Google with technical SEO, keyword strategy, and content that ranks. Compounding organic traffic that grows month over month.',
+    gradient: 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #6d28d9 100%)',
+    iconBg: 'rgba(255,255,255,0.18)',
+    icon: (
+      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    ),
   },
   {
     id: 4,
-    title: 'Social Media Management',
-    description: "Strategic social presence that builds community and drives engagement. We create, schedule, and optimize content across all major platforms with data at the helm.",
-    year: '2025',
-    role: 'Social Strategist',
-    services: ['Content Creation', 'Scheduling', 'Instagram', 'LinkedIn'],
-    accent: '#34d399',
-    tag: 'Fg',
-    mockupBg: 'linear-gradient(135deg, #0a2e1a 0%, #103d20 50%, #155c30 100%)',
-    mockupAccent: 'rgba(52,211,153,0.3)',
-    mockupTitle: 'Greenwave Social Hub',
-    mockupSubtitle: 'Social Media Strategy',
+    title: 'Influencer Marketing',
+    description: 'Connect your brand with the right creators. We identify, manage, and track influencer campaigns that deliver real reach and real conversions.',
+    gradient: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
+    iconBg: 'rgba(255,255,255,0.18)',
+    icon: (
+      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
   },
   {
     id: 5,
-    title: 'SEO Optimization',
-    description: "Dominate search rankings with technical precision. Keyword research, on-page optimization, authority building — compounding organic traffic that grows month over month.",
-    year: '2025',
-    role: 'SEO Lead',
-    services: ['Technical SEO', 'Keyword Research', 'Link Building', 'Content Strategy'],
-    accent: '#38bdf8',
-    tag: 'In',
-    mockupBg: 'linear-gradient(135deg, #0a1a2e 0%, #0f2a40 50%, #153d5c 100%)',
-    mockupAccent: 'rgba(56,189,248,0.3)',
-    mockupTitle: 'Apex Search Consulting',
-    mockupSubtitle: 'SEO & Content Strategy',
+    title: 'Social Media Management',
+    description: 'Strategic content, consistent posting, and community management across Instagram, LinkedIn, and more — so you stay top of mind.',
+    gradient: 'linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%)',
+    iconBg: 'rgba(255,255,255,0.18)',
+    icon: (
+      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+      </svg>
+    ),
+  },
+  {
+    id: 6,
+    title: 'Branding & Identity',
+    description: 'Build a brand that people remember. Logo design, brand guidelines, visual identity — everything you need to stand out in a crowded market.',
+    gradient: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%)',
+    iconBg: 'rgba(255,255,255,0.18)',
+    icon: (
+      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
   },
 ]
 
-function LaptopMockup({ card }) {
-  return (
-    <div className="relative w-full flex items-center justify-center">
-
-      <div
-        className="absolute inset-0 rounded-3xl pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse at 50% 60%, ${card.mockupAccent} 0%, transparent 70%)`,
-          filter: 'blur(30px)',
-        }}
-      />
-
-      <div className="relative w-[85%] max-w-[520px]">
-
-        <div
-          className="relative rounded-t-2xl overflow-hidden border border-white/10"
-          style={{ paddingTop: '62%', background: card.mockupBg }}
-        >
-          <div className="absolute inset-0 p-5 flex flex-col justify-between">
-            <div className="flex items-center gap-2 mb-3">
-              <div
-                className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded"
-                style={{ backgroundColor: card.accent, color: '#000' }}
-              >
-                {card.tag}
-              </div>
-              <div className="flex-1 h-1 rounded bg-white/5" />
-              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: card.accent }} />
-            </div>
-
-            <div
-              className="flex-1 rounded-xl overflow-hidden relative flex items-end p-4"
-              style={{
-                background: `linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%), ${card.mockupBg}`,
-                border: `1px solid ${card.accent}25`,
-              }}
-            >
-              <div className="absolute inset-0 opacity-30">
-                {[...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute bottom-0 rounded-t-sm"
-                    style={{
-                      left: `${10 + i * 14}%`,
-                      width: '10%',
-                      height: `${30 + (i % 3) * 20}%`,
-                      backgroundColor: card.accent,
-                      opacity: 0.4 + (i % 3) * 0.2,
-                    }}
-                  />
-                ))}
-              </div>
-
-              <div className="relative z-10">
-                <p className="text-white/50 text-[9px] uppercase tracking-widest mb-1">{card.mockupSubtitle}</p>
-                <h3 className="text-white font-bold text-base leading-tight">{card.mockupTitle}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="h-2.5 bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] rounded-b border-t border-white/5" />
-        <div className="h-1.5 bg-gradient-to-b from-[#1a1a1a] to-[#111] rounded-b-xl mx-4 border-x border-b border-white/5" />
-
-        <div
-          className="absolute -bottom-4 -right-4 w-[22%] rounded-xl overflow-hidden border border-white/10 shadow-xl"
-          style={{ aspectRatio: '9/16', background: card.mockupBg }}
-        >
-          <div className="p-1.5 h-full flex flex-col gap-1">
-            <div className="w-full rounded bg-white/10 flex-1" style={{ background: `${card.accent}25` }} />
-            <div className="w-2/3 h-1 rounded bg-white/10" />
-            <div className="w-1/2 h-1 rounded bg-white/10" />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ScrollCard({ card, index, totalCards }) {
-  const wrapperRef = useRef(null)
-
-  const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ['start start', 'end start']
-  })
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-
-  const topOffset = `12vh`
+function WhatWeOffer() {
+  const sectionRef = useRef(null)
+  const inView = useInView(sectionRef, { once: true, margin: '-80px' })
 
   return (
-    <div ref={wrapperRef} className="w-full relative" style={{ height: '100vh' }}>
-      <div
-        className="sticky w-full flex justify-center px-4 md:px-10"
-        style={{ top: topOffset }}
-      >
+    <section
+      id="process"
+      ref={sectionRef}
+      className="relative dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors py-24 md:py-32"
+    >
+      <GradientBackground />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Heading */}
         <motion.div
-          style={{
-            scale: index === totalCards - 1 ? 1 : scale,
-            opacity: index === totalCards - 1 ? 1 : opacity,
-            transformOrigin: 'top center',
-          }}
-          className="relative w-full max-w-[85rem] rounded-[32px] overflow-hidden"
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <div
-            className="absolute inset-0 bg-[#0A0A0E] border border-white/10 transition-colors"
-            style={{
-              boxShadow: `0 -10px 40px rgba(0,0,0,0.1), 0 30px 60px rgba(0,0,0,0.4)`,
-            }}
-          />
+          <span className="font-mono text-[11px] text-[#FF5A1F] tracking-[0.3em] uppercase">(Our Services)</span>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4.5rem)] dark:text-white text-[#1a1a1a] mt-3 tracking-tight">
+            WHAT WE OFFER
+          </h2>
+          <p className="mt-4 text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
+            Everything your startup needs to launch, grow, and scale — under one roof.
+          </p>
+        </motion.div>
 
-          <div
-            className="absolute top-0 left-0 right-0 h-px"
-            style={{ background: `linear-gradient(90deg, transparent 0%, ${card.accent}80 50%, transparent 100%)` }}
-          />
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {offerCards.map((card, i) => (
+            <motion.div
+              key={card.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="relative rounded-3xl overflow-hidden p-8 flex flex-col gap-6 cursor-default shadow-lg hover:shadow-2xl transition-shadow duration-500"
+              style={{ background: card.gradient, minHeight: '280px' }}
+            >
+              {/* Crescent + Icon */}
+              <div className="relative w-16 h-16">
+                {/* Crescent moon behind */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'rgba(255,255,255,0.15)',
+                    transform: 'translateX(-6px) translateY(4px)',
+                  }}
+                />
+                {/* Icon circle */}
+                <div
+                  className="absolute inset-0 rounded-full flex items-center justify-center"
+                  style={{ background: card.iconBg, backdropFilter: 'blur(8px)' }}
+                >
+                  {card.icon}
+                </div>
+              </div>
 
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-[280px_1fr_240px]" style={{ height: 'clamp(380px, 75vh, 650px)' }}>
-
-            <div className="flex flex-col justify-between p-8 md:p-12 border-r border-white/5">
-              <div className="mt-8">
-                <p className="text-[#a0a0a0] text-[15px] leading-relaxed transition-colors">
+              {/* Text */}
+              <div className="flex flex-col gap-3 flex-1">
+                <h3 className="font-display font-bold text-white text-2xl leading-snug">
+                  {card.title}
+                </h3>
+                <p className="text-white/75 text-[15px] leading-relaxed">
                   {card.description}
                 </p>
               </div>
-              <button
-                className="self-start text-xs font-medium px-5 py-2.5 rounded-full border transition-all hover:opacity-80"
-                style={{ color: card.accent, borderColor: `${card.accent}40`, backgroundColor: `${card.accent}12` }}
+
+              {/* Subtle bottom link */}
+              <a
+                href="/services"
+                className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-semibold transition-colors duration-200 group"
               >
-                View Work →
-              </button>
-            </div>
+                Learn More
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
 
-            <div className="flex items-center justify-center px-6 py-8 relative">
-              <LaptopMockup card={card} />
-            </div>
-
-            <div className="flex flex-col justify-center gap-8 p-8 md:p-12 border-l border-white/5">
-              <div>
-                <p className="text-[#666] text-[10px] uppercase tracking-[0.15em] mb-2 font-semibold">Year</p>
-                <p className="text-white font-bold text-2xl">{card.year}</p>
-              </div>
-              <div>
-                <p className="text-[#666] text-[10px] uppercase tracking-[0.15em] mb-2 font-semibold">Role</p>
-                <p className="text-[#f0f0f0] text-sm">{card.role}</p>
-              </div>
-              <div>
-                <p className="text-[#666] text-[10px] uppercase tracking-[0.15em] mb-2 font-semibold">Services</p>
-                <div className="flex flex-col gap-1.5">
-                  {card.services.map((s, i) => (
-                    <p key={i} className="text-[#f0f0f0] font-medium text-[13px]">{s}</p>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-8 md:px-12 py-5 border-t border-white/5 bg-[#0A0A0E] backdrop-blur-md transition-colors"
-          >
-            <h3 className="text-white font-bold text-lg tracking-tight">{card.title}</h3>
-            <span className="text-[#666] font-mono text-sm tracking-widest font-semibold">
-              0{card.id} / 0{totalCards}
-            </span>
-          </div>
-
-        </motion.div>
-      </div>
-    </div>
-  )
-}
-
-function Process() {
-  return (
-    <section id="process" className="relative dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors pt-20 pb-0">
-      <GradientBackground />
-      <div className="sticky top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden select-none">
-        <h2
-          className="font-display font-black text-[clamp(4rem,14vw,12rem)] text-slate-200 dark:text-white/5 leading-none tracking-tight transition-colors"
-          style={{ textShadow: '0 10px 30px rgba(0,0,0,0.02)' }}
-        >
-          Recent Works
-        </h2>
-      </div>
-
-      <div className="relative z-10 w-full mx-auto pb-0">
-        <div className="flex-shrink-0 pt-4 pb-0 text-center relative z-20">
-          <span className="font-mono text-[11px] text-[#555] tracking-[0.3em] uppercase">(Why clients love us)</span>
-        </div>
-
-        <div className="mt-10">
-          {cards.map((card, i) => (
-            <ScrollCard
-              key={card.id}
-              card={card}
-              index={i}
-              totalCards={cards.length}
-            />
+              {/* Shine overlay */}
+              <div
+                className="absolute top-0 left-0 right-0 h-px"
+                style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)' }}
+              />
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   )
+}
+
+function Process() {
+  return <WhatWeOffer />
 }
 
 const projects = [
@@ -687,19 +595,35 @@ function Portfolio() {
     <section id="portfolio" className="relative dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors pt-10 pb-24">
       <GradientBackground />
 
-      <div className="sticky top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden select-none">
-        <h2
-          className="font-display font-black text-[clamp(4rem,14vw,12rem)] text-slate-200 dark:text-white/5 leading-none tracking-tight whitespace-nowrap transition-colors"
+      <div className="absolute top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden pb-10 select-none">
+        <p
+          aria-hidden="true"
+          className="font-display font-black text-[clamp(2.5rem,10vw,10rem)] text-slate-200 dark:text-white/5 leading-none tracking-tight whitespace-nowrap transition-colors"
           style={{ textShadow: '0 10px 30px rgba(0,0,0,0.01)' }}
         >
           Our Portfolio
-        </h2>
+        </p>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 -mt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 mt-12">
 
-        <div className="flex-shrink-0 pt-4 pb-0 text-center relative z-20 mb-12">
-          <span className="font-mono text-[11px] text-[#555] tracking-[0.3em] uppercase">(Selected Works)</span>
+        <div className="flex-shrink-0 text-center relative z-20 mb-6">
+          <span className="font-mono text-[11px] text-[#FF5A1F] tracking-[0.3em] uppercase mb-3 block">(Our Portfolio)</span>
+          <h2 className="font-display font-black text-[clamp(1.8rem,3.5vw,2.5rem)] dark:text-white text-[#1a1a1a] tracking-tight mb-2">
+            Selected Works — Web &amp; Digital Projects
+          </h2>
+        </div>
+        <div className="flex justify-center mb-8">
+          <a
+            href="/work"
+            id="portfolio-view-all-cta"
+            className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#FF5A1F]/10 text-[#FF5A1F] border border-[#FF5A1F]/30 hover:bg-[#FF5A1F] hover:text-white text-sm font-semibold transition-all duration-300"
+          >
+            View All Case Studies
+            <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 md:gap-3 min-h-[500px]">
@@ -767,7 +691,7 @@ function Portfolio() {
                   </span>
 
                   <div className={`transition-all duration-500 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-80 md:opacity-100'}`}>
-                    <h3 className={`font-bold text-white drop-shadow transition-all duration-500 ${isActive ? 'text-2xl mb-3' : 'text-lg md:-rotate-90 md:origin-bottom-left md:absolute md:bottom-16 md:left-6 whitespace-nowrap mb-0'}`}>
+                    <h3 className={`font-bold text-white drop-shadow transition-all duration-500 ${isActive ? 'text-2xl mb-3' : 'text-lg md:absolute md:bottom-16 md:left-6 whitespace-normal w-[80%] mb-0'}`}>
                       {project.title}
                     </h3>
 
@@ -793,7 +717,7 @@ function Portfolio() {
 }
 
 function CTA() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState(null)
@@ -802,6 +726,21 @@ function CTA() {
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
+    
+    // Phone validation
+    const phoneRegex = /^[\d\s+\-()]+$/;
+    if (!phoneRegex.test(form.phone)) {
+      setError("Mobile number contains invalid characters.")
+      setIsSubmitting(false)
+      return
+    }
+
+    const cleanedPhone = form.phone.replace(/\D/g, '');
+    if (cleanedPhone.length < 10 || cleanedPhone.length > 15) {
+      setError("Please enter a valid mobile number (10-15 digits).")
+      setIsSubmitting(false)
+      return
+    }
     
     try {
       const response = await fetch("https://leyvolvecombackend.onrender.com/api/send-message", {
@@ -833,7 +772,7 @@ function CTA() {
 
       <div className="absolute top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden select-none">
         <h2
-          className="font-display font-black text-[clamp(4rem,14vw,14rem)] text-slate-200 dark:text-white/5 leading-none tracking-tight whitespace-nowrap transition-colors"
+          className="font-display font-black text-[clamp(3rem,10vw,12rem)] text-slate-200 dark:text-white/5 leading-none tracking-tight whitespace-nowrap transition-colors"
           style={{ textShadow: '0 10px 30px rgba(0,0,0,0.02)' }}
         >
           Let's Connect
@@ -872,13 +811,21 @@ function CTA() {
 
             <div className="flex-1 md:max-w-md">
               <PremiumReveal 
-                text="Got a project in mind?"
+                text="Ready to grow your startup?"
                 className="font-display font-bold text-white text-5xl md:text-6xl tracking-tight leading-[1.1] mb-6"
                 stagger={0.05}
               />
-              <p className="text-gray-300 text-sm md:text-base">
-                Let's make something happen together
+              <p className="text-gray-300 text-sm md:text-base mb-8">
+                Join 100+ startups already growing with Leyvolve. Get your free website audit today.
               </p>
+              <div className="grid grid-cols-3 gap-4">
+                {[['3x', 'Avg. Conversions'], ['287%', 'Traffic Growth'], ['90 Days', '#1 Google Ranking']].map(([val, label]) => (
+                  <div key={label} className="text-center">
+                    <div className="text-[#FF5A1F] font-display font-black text-xl md:text-2xl">{val}</div>
+                    <div className="text-white/40 text-[10px] mt-1 leading-tight">{label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="flex-1 w-full max-w-lg">
@@ -925,7 +872,20 @@ function CTA() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="desc" className="text-white font-semibold text-sm">Project Description</label>
+                    <label htmlFor="phone" className="text-white font-semibold text-sm">Mobile Number</label>
+                    <input
+                      required
+                      type="tel"
+                      id="phone"
+                      placeholder="Enter Your Mobile Number"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className="w-full bg-transparent border-0 border-b border-white/20 text-white placeholder-white/30 text-sm focus:ring-0 focus:border-white transition-colors py-2 px-0"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="desc" className="text-white font-semibold text-sm">Describe Your Buisness</label>
                     <textarea
                       required
                       id="desc"
@@ -945,10 +905,11 @@ function CTA() {
 
                   <button
                     type="submit"
+                    id="homepage-contact-submit"
                     disabled={isSubmitting}
-                    className={`w-full mt-4 bg-white/90 hover:bg-white text-black font-semibold text-sm rounded-full py-3 transition-colors text-center ${isSubmitting ? 'opacity-70' : ''}`}
+                    className={`w-full mt-4 bg-gradient-to-r from-[#FF6A00] to-[#FF3C00] hover:from-[#e05c00] hover:to-[#d03400] text-white font-bold text-sm rounded-full py-3.5 transition-all duration-300 shadow-lg shadow-orange-500/30 text-center ${isSubmitting ? 'opacity-70' : 'hover:scale-[1.02]'}`}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Now!'}
+                    {isSubmitting ? 'Sending...' : 'Get Free Website Audit →'}
                   </button>
                 </form>
               )}
@@ -986,6 +947,7 @@ export default function Home() {
       <main className="pb-20">
         <Hero />
         <Services />
+        <StatsBar />
         <About />
         <Process />
         <Portfolio />

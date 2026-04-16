@@ -64,6 +64,8 @@ import Aboutus from './pages/Aboutus.jsx'
 import Services from './pages/Services.jsx'
 import Contact from './pages/Contact.jsx'
 import Work from './pages/Work.jsx'
+import Blog from './pages/Blog.jsx'
+import CaseStudies from './pages/CaseStudies.jsx'
 import LoadingScreen from './components/LoadingScreen.jsx'
 import WhatsAppButton from './components/WhatsAppButton.jsx'
 
@@ -91,6 +93,8 @@ export default function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/work" element={<Work />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
             </Routes>
           </Router>
         </motion.div>

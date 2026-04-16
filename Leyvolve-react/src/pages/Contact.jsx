@@ -164,6 +164,22 @@ function ContactForm() {
         e.preventDefault()
         setIsSubmitting(true)
         setError(null)
+
+        if (form.phone) {
+            const phoneRegex = /^[\d\s+\-()]+$/;
+            if (!phoneRegex.test(form.phone)) {
+                setError("Mobile number contains invalid characters.")
+                setIsSubmitting(false)
+                return
+            }
+
+            const cleanedPhone = form.phone.replace(/\D/g, '');
+            if (cleanedPhone.length < 10 || cleanedPhone.length > 15) {
+                setError("Please enter a valid mobile number (10-15 digits).")
+                setIsSubmitting(false)
+                return
+            }
+        }
         
         try {
             const response = await fetch("https://leyvolvecombackend.onrender.com/api/send-message", {

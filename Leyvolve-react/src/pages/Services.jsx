@@ -188,26 +188,26 @@ function Hero() {
                 </Reveal>
 
                 <Reveal delay={0.1}>
-                    <PremiumReveal 
-                        text="Digital Services That Help Your Business Grow"
-                        className="font-display font-black text-[clamp(2.8rem,7vw,6rem)] leading-[1.02] tracking-tight text-[#111] mb-6"
-                        stagger={0.05}
-                    />
+                    <h1 className="font-display font-black text-[clamp(2.8rem,7vw,6rem)] leading-[1.02] tracking-tight text-[#111] mb-6">
+                        Web Design &amp; Digital Marketing
+                        <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6A00] to-[#FF3C00]">Services for Startups in India</span>
+                    </h1>
                 </Reveal>
 
                 <Reveal delay={0.2}>
                     <p className="text-slate-500 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-                        We help brands grow online through strategic design, marketing, and digital solutions.
+                        High-converting website design, performance marketing &amp; branding — built for India's fastest-growing startups.
                     </p>
                 </Reveal>
 
                 <Reveal delay={0.3}>
                     <a
-                        href="#contact"
-                        onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
+                        href="/contact"
+                        id="services-hero-cta"
                         className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#FF6A00] to-[#FF3C00] text-white font-semibold text-[15px] shadow-lg shadow-orange-300/30 hover:shadow-orange-400/50 transition-all duration-300 hover:scale-105"
                     >
-                        Start a Project
+                        Get Free Audit
                         <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
@@ -226,11 +226,9 @@ function ServicesGrid() {
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 <Reveal className="text-center mb-16">
                     <span className="font-mono text-[11px] text-[#FF6A00] tracking-[0.3em] uppercase">(What We Do)</span>
-                    <PremiumReveal 
-                        text="Our Core Services"
-                        className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] text-[#111] mt-3"
-                        stagger={0.05}
-                    />
+                    <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] text-[#111] mt-3">
+                        High-Converting Website Design &amp; Marketing Services
+                    </h2>
                 </Reveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -564,7 +562,7 @@ function Testimonials() {
 
 /* ─── 7. CTA / CONTACT ─── */
 function CTA() {
-    const [form, setForm] = useState({ name: '', email: '', service: '', message: '' })
+    const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' })
     const [submitted, setSubmitted] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState(null)
@@ -573,6 +571,23 @@ function CTA() {
         e.preventDefault()
         setIsSubmitting(true)
         setError(null)
+        
+        // Phone validation
+        if (form.phone) {
+            const phoneRegex = /^[\d\s+\-()]+$/;
+            if (!phoneRegex.test(form.phone)) {
+                setError("Mobile number contains invalid characters.")
+                setIsSubmitting(false)
+                return
+            }
+
+            const cleanedPhone = form.phone.replace(/\D/g, '');
+            if (cleanedPhone.length < 10 || cleanedPhone.length > 15) {
+                setError("Please enter a valid mobile number (10-15 digits).")
+                setIsSubmitting(false)
+                return
+            }
+        }
         
         try {
             const response = await fetch("https://leyvolvecombackend.onrender.com/api/send-message", {
@@ -658,6 +673,7 @@ function CTA() {
                                     {[
                                         { name: 'name', label: 'Your Name', type: 'text', placeholder: 'John Doe' },
                                         { name: 'email', label: 'Your Email', type: 'email', placeholder: 'john@yourcompany.com' },
+                                        { name: 'phone', label: 'Mobile Number', type: 'tel', placeholder: '+91 98765 43210' },
                                     ].map(({ name, label, type, placeholder }) => (
                                         <div key={name}>
                                             <label className="text-white/50 text-xs font-medium mb-2 block">{label}</label>
@@ -692,12 +708,13 @@ function CTA() {
 
                                     <motion.button
                                         type="submit"
+                                        id="services-contact-submit"
                                         disabled={isSubmitting}
                                         whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                                         whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                                        className={`w-full py-4 rounded-xl text-white font-bold text-sm bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-wait' : ''}`}
+                                        className={`w-full py-4 rounded-xl text-white font-bold text-sm bg-gradient-to-r from-[#FF6A00] to-[#FF3C00] shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-wait' : ''}`}
                                     >
-                                        {isSubmitting ? 'Sending...' : 'Send Message →'}
+                                        {isSubmitting ? 'Sending...' : 'Book Free 30-min Strategy Call →'}
                                     </motion.button>
                                 </form>
                             )}

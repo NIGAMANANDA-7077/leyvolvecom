@@ -7,8 +7,8 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Works', href: '/work' },
   { label: 'Services', href: '/services' },
+  { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/aboutus' },
-  
 ]
 
 export default function Navbar() {
@@ -107,7 +107,8 @@ export default function Navbar() {
               animate={!loading ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               transition={{ delay: 1, duration: 0.6 }}
               onClick={() => handleNav('/contact')}
-              className="px-7 py-2.5 text-sm font-medium rounded-full transition-colors duration-300 text-white bg-slate-900 hover:bg-slate-800 shadow-md"
+              id="nav-cta-btn"
+              className="px-7 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 text-white bg-gradient-to-r from-[#FF6A00] to-[#FF3C00] hover:shadow-lg hover:shadow-orange-400/40 hover:scale-105"
             >
               Contact
             </motion.button>

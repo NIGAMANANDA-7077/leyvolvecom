@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '#about' },
-  { label: 'Process', href: '#process' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Services', href: '/services' },
+  { label: 'Works', href: '/work' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'About', href: '/aboutus' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 const services = [
@@ -39,13 +41,18 @@ const socials = [
   },
 ]
 
-const handleScroll = (href) => {
-  if (href === '#') return
-  const el = document.querySelector(href)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
-}
-
 export default function Footer() {
+  const navigate = useNavigate()
+
+  const handleNav = (href) => {
+    if (href.startsWith('/')) {
+      navigate(href)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const el = document.querySelector(href)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
   return (
     <footer className="relative bg-slate-900 border-t border-slate-800">
       {/* Top gradient */}
@@ -66,8 +73,11 @@ export default function Footer() {
               <span className="font-display font-bold text-lg tracking-tight text-white">Leyvolve</span>
             </div>
 
-            <p className="font-body text-sm text-slate-400 leading-relaxed mb-6 max-w-[220px]">
+            <p className="font-body text-sm text-slate-400 leading-relaxed mb-2 max-w-[220px]">
               Building digital experiences that drive measurable growth for modern brands.
+            </p>
+            <p className="font-body text-[11px] text-slate-500 leading-relaxed mb-6 max-w-[220px]">
+              Web Design Agency India · Digital Marketing for Startups
             </p>
 
             <div className="flex gap-3">
@@ -92,8 +102,8 @@ export default function Footer() {
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <button
-                    onClick={() => handleScroll(link.href)}
-                    className="font-body text-sm text-slate-400 hover:text-white transition-colors duration-300"
+                    onClick={() => handleNav(link.href)}
+                    className="font-body text-sm text-slate-400 hover:text-white transition-colors duration-300 text-left"
                   >
                     {link.label}
                   </button>
@@ -109,8 +119,8 @@ export default function Footer() {
               {services.map((s) => (
                 <li key={s}>
                   <button
-                    onClick={() => handleScroll('#services')}
-                    className="font-body text-sm text-slate-400 hover:text-white transition-colors duration-300"
+                    onClick={() => handleNav('/services')}
+                    className="font-body text-sm text-slate-400 hover:text-white transition-colors duration-300 text-left"
                   >
                     {s}
                   </button>
@@ -146,10 +156,10 @@ export default function Footer() {
               </div>
 
               <button
-                onClick={() => handleScroll('#contact')}
-                className="group inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full text-xs font-display font-medium text-white border border-blue-500/40 bg-blue-500/10 hover:border-blue-400 hover:bg-blue-500/20 transition-all duration-300"
+                onClick={() => handleNav('/contact')}
+                className="group inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full text-xs font-display font-medium text-white border border-[#FF6A00]/40 bg-[#FF6A00]/10 hover:border-[#FF6A00] hover:bg-[#FF6A00]/20 transition-all duration-300"
               >
-                Start a Project
+                Contact
                 <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
