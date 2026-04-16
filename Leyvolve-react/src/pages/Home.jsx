@@ -184,7 +184,7 @@ function Services() {
     <section
       id="services"
       ref={containerRef}
-      className="relative w-full overflow-hidden dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors py-32 flex flex-col justify-center items-center -mt-16"
+      className="relative w-full overflow-hidden dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors py-16 md:py-32 flex flex-col justify-center items-center -mt-8 md:-mt-16"
       style={{ zIndex: 10 }}
     >
       <GradientBackground />
@@ -269,7 +269,7 @@ function StatsBar() {
   }
 
   return (
-    <section ref={ref} className="relative dark:bg-[#0a0a0f] bg-white transition-colors py-14 -mt-6 z-[5]">
+    <section ref={ref} className="relative dark:bg-[#0a0a0f] bg-white transition-colors py-8 md:py-14 -mt-4 md:-mt-6 z-[5]">
       <div className="max-w-5xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
           {stats.map((s, i) => (
@@ -307,7 +307,7 @@ function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full dark:bg-[#08080a]/80 bg-slate-100/60 backdrop-blur-3xl transition-colors py-24 md:py-32 flex flex-col items-center justify-center -mt-8"
+      className="relative w-full dark:bg-[#08080a]/80 bg-slate-100/60 backdrop-blur-3xl transition-colors py-14 md:py-32 flex flex-col items-center justify-center -mt-4 md:-mt-8"
       style={{ zIndex: 1 }}
     >
       <GradientBackground />
@@ -447,7 +447,7 @@ function WhatWeOffer() {
     <section
       id="process"
       ref={sectionRef}
-      className="relative dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors py-24 md:py-32"
+      className="relative dark:bg-[#0f0f13]/80 bg-white/60 backdrop-blur-3xl transition-colors py-14 md:py-32"
     >
       <GradientBackground />
 
@@ -457,7 +457,7 @@ function WhatWeOffer() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <span className="font-mono text-[11px] text-[#FF5A1F] tracking-[0.3em] uppercase">(Our Services)</span>
           <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4.5rem)] dark:text-white text-[#1a1a1a] mt-3 tracking-tight">
@@ -592,7 +592,7 @@ function Portfolio() {
   const [activeCard, setActiveCard] = useState(1)
 
   return (
-    <section id="portfolio" className="relative dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors pt-10 pb-24">
+    <section id="portfolio" className="relative dark:bg-[#15151a]/80 bg-slate-50/60 backdrop-blur-3xl transition-colors pt-8 pb-14 md:pt-10 md:pb-24">
       <GradientBackground />
 
       <div className="absolute top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden pb-10 select-none">
@@ -767,7 +767,7 @@ function CTA() {
   }
 
   return (
-    <section id="contact" className="relative dark:bg-[#0a0a0f]/80 bg-white/60 backdrop-blur-3xl transition-colors py-32 overflow-hidden flex flex-col items-center">
+    <section id="contact" className="relative dark:bg-[#0a0a0f]/80 bg-white/60 backdrop-blur-3xl transition-colors py-14 md:py-32 overflow-hidden flex flex-col items-center">
       <GradientBackground />
 
       <div className="absolute top-10 w-full flex justify-center pointer-events-none z-0 overflow-hidden select-none">
@@ -807,12 +807,12 @@ function CTA() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-0 pointer-events-none" />
           <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col md:flex-row justify-between p-12 md:p-24 pb-16 gap-16 md:gap-8">
+          <div className="relative z-10 flex flex-col md:flex-row justify-between p-7 md:p-24 pb-10 md:pb-16 gap-8 md:gap-8">
 
             <div className="flex-1 md:max-w-md">
               <PremiumReveal 
                 text="Ready to grow your startup?"
-                className="font-display font-bold text-white text-5xl md:text-6xl tracking-tight leading-[1.1] mb-6"
+                className="font-display font-bold text-white text-3xl md:text-6xl tracking-tight leading-[1.1] mb-4 md:mb-6"
                 stagger={0.05}
               />
               <p className="text-gray-300 text-sm md:text-base mb-8">
